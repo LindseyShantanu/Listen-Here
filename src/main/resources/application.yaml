@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: podcast
+    password: podcast
+    url: jdbc:mysql://localhost:3306/podcast
+
+
+logging:
+  level:
+    root: warn
+    '[com.promineotech]': debug
