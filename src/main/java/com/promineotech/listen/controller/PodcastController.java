@@ -25,8 +25,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 @Validated
-@RequestMapping("/Podcast") 
-@OpenAPIDefinition(info = @Info(title = "PocastService"), servers = {
+@RequestMapping("/podcast") 
+@OpenAPIDefinition(info = @Info(title = "PocastApp"), servers = {
     @Server(url = "http://localhost:8080", description = "Local server.")})
 public interface PodcastController {
 

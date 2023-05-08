@@ -28,13 +28,29 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
   public List<Podcast> fetchPodcasts(String category) {
     log.debug("DAO: category={}", category);
 
+    /*
+     * private List<Category> fectchRecipeCategories(Connection conn, Integer recipeId) {
+        String sql = 
+                "SELECT c.* " 
+                + "FROM RECIPE_CATEGORY_TABLE" + " rc " 
+                + "JOIN CATEGORY_TABLE"
+                + " c USING (category_id) " 
+                + "WHERE recipe_id = ? " 
+                + "ORDER BY c.category_name";
+
+     */
     // @formatter: off
-    String sql = !! "SELECT * " + "FROM podcast " + "JOIN category " + "ON "
+    String sql = 
+        "SELECT * " 
+        + "FROM podcast " 
+        + "RIGHT JOIN category "
+        + "USING podcast_id = podcast_fk" 
+        + "ON category_fk = category_id"
         + "WHERE category_name = :category_name";
     // @formatter: on
 
     Map<String, Object> params = new HashMap<>();
-    params.put("category_name", category.toString());
+    params.put("category_name", category.toLowerCase());
 
     return jdbcTemplate.query(sql, params, new RowMapper<>() {
       @Override
@@ -161,10 +177,5 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
         // @formatter:on
   }
 
-
-
-  // fetchListeners
-
-  // deleteListener(String name, int favorites_id)
 }
 

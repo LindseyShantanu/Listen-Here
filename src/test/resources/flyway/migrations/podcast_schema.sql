@@ -41,5 +41,6 @@ CREATE TABLE podcast_category(
 	podcast_fk int unsigned NOT NULL,
 	category_fk int unsigned NOT NULL,
 	FOREIGN KEY (podcast_fk) REFERENCES podcast (podcast_id) ON DELETE CASCADE,
-	FOREIGN KEY (category_fk) REFERENCES category (category_id) ON DELETE CASCADE
+	FOREIGN KEY (category_fk) REFERENCES category (category_id) ON DELETE CASCADE,
+    UNIQUE KEY (podcast_fk, category_fk)
 );
