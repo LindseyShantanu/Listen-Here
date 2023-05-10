@@ -8,5 +8,6 @@ import lombok.Data;
 public class Listener {
   private int listener_id;
   private String listener_name;
-  private int favorites_fk;
+  private int favorite_id;
+  private String about;
 }

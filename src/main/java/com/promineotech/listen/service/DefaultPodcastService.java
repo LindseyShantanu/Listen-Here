@@ -1,7 +1,8 @@
 package com.promineotech.listen.service;
 
 import java.math.BigDecimal;
-import java.util.Date;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -40,25 +41,31 @@ public class DefaultPodcastService implements PodcastService{
 //POST/CREATE operation
   @Override
   public Optional<Podcast> newPodcast(String podcast_name, String podcast_author, 
-      BigDecimal rating, int listeners, Date date_created) {
+      BigDecimal rating, int listeners, String date_created) {
     log.info("The newPodcast method was called with "
         + "podcast_name={},  podcast_author={},"
         + "  rating={}, listeners={}, date_created={}", 
         podcast_name, podcast_author, rating, listeners, date_created);
-    return podcastApplicationDao.newPodcast(podcast_name, podcast_author, rating, listeners, date_created);
+   /*
+    *  String pattern = "yyyy-MM-dd";
+    *  SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+    *  formatter.format(date_created);
+    */
+    
+    
+    return podcastApplicationDao.newPodcast(podcast_name, podcast_author, rating, listeners, date_created.toString());
   }
 
 //PUT/UPDATE operation
   @Override
   public Optional<Podcast> updatePodcast(String podcast_name, String podcast_author,
-      BigDecimal rating, int listeners, Date date_created, 
       String new_podcast_name, String new_podcast_author, 
-      BigDecimal new_rating, int new_listeners, Date new_date_created) {
+      BigDecimal new_rating, int new_listeners, String new_date_created) {
     log.info("podcast_name={}, podcast_author={}, rating={}, listeners={}, date_created={}"
         + "new_podcast_name={}, new_podcast_author={}, new_rating={}, new_listeners={}, new_date_created={}",
-        podcast_name, podcast_author, rating, listeners, date_created,
+        podcast_name, podcast_author,
         new_podcast_name, new_podcast_author, new_rating, new_listeners, new_date_created);
-    return podcastApplicationDao.updatePodcast(podcast_name, podcast_author, rating, listeners, date_created,
+    return podcastApplicationDao.updatePodcast(podcast_name, podcast_author,
         new_podcast_name, new_podcast_author, new_rating, new_listeners, new_date_created);
   }
 

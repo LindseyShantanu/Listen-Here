@@ -17,9 +17,9 @@ public class DefaultCategoryService implements CategoryService {
  
 //GET/READ operation
   @Override
-  public List<Category> fetchCategoriesByPodcastName(String podcastName) {
-    log.info("podcastName ={}", podcastName);
-    return categoryDao.fetchCategoriesByPodcastName(podcastName);
+  public List<Category> fetchCategoriesByPodcastName(String podcast_name) {
+    log.info("podcastName ={}", podcast_name);
+    return categoryDao.fetchCategoriesByPodcastName(podcast_name);
   }
 
 // POST/CREATE operation

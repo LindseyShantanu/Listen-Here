@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.promineotech.listen.entity.Favorites;
 import com.promineotech.listen.entity.Listener;
+import com.promineotech.listen.entity.Podcast;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -65,8 +65,8 @@ public interface ListenerController {
   
   // fetchListenersByFavoritesId
   @Operation(
-      summary = "View listeners by favorites Id",
-      description = "Returns a listener by Favorites Id",
+      summary = "View listeners by favorite Id",
+      description = "Returns a listener by Favorite Id",
       responses = {
           @ApiResponse(
               responseCode = "200", 
@@ -88,23 +88,23 @@ public interface ListenerController {
       },
       parameters = {
           @Parameter(
-              name = "favorite_fk", 
+              name = "favorite_id", 
               allowEmptyValue = false, 
               required = true, 
-              description = "The id associate with the listener's favoites")
+              description = "The id associate with the listener's favoite")
       }
   )
   
-  @GetMapping(value = "/listeners-by-favoites-id")
+  @GetMapping(value = "/listeners-by-favoite-id")
   @ResponseStatus(code = HttpStatus.OK)
   Optional<Listener> fetchListenerByFavoritesId(
       @RequestParam(required = true) 
         int favorite_id);
   
-  // fetchFavoritesByFavoitesId
+  // fetchPodcastsByFavoitesId
   @Operation(
       summary = "View Favorites",
-      description = "Returns a list of Listener's Favorites",
+      description = "Returns a list of Listener's Favorite Podcasts",
       responses = {
           @ApiResponse(
               responseCode = "200", 
@@ -133,10 +133,10 @@ public interface ListenerController {
       }
   )
   
-  @GetMapping(value = "/favorites-by-favorites-id")
+  @GetMapping(value = "/podcasts-by-favorites-id")
   @ResponseStatus(code = HttpStatus.OK)
-  List<Favorites> fetchFavoritesByFavoritesId(
+  List<Podcast> fetchFavoritesByFavoritesId(
       @RequestParam(required = true) 
-        int favoritesId);
+        int favorites_id);
   
 }

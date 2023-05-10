@@ -31,7 +31,6 @@ CREATE TABLE listener(
 	listener_id int unsigned NOT NULL AUTO_INCREMENT,
 	listener_name varchar(40),
     favorites_fk int unsigned,
-    about varchar(150),
     PRIMARY KEY (listener_id),
     FOREIGN KEY (favorites_fk) references favorites (favorites_id)
 );

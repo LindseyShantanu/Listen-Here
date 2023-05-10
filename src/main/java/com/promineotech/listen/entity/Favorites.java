@@ -1,6 +1,6 @@
 package com.promineotech.listen.entity;
 
-import java.util.Map;
+//import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,5 +8,5 @@ import lombok.Data;
 @Builder
 public class Favorites {
   private int favorites_id;
-  private Map<Integer, Podcast> podcast_fk; //This may throw an error
+  private int podcast_fk; //Originally had this as a Map<Integer, Podcast>
 }

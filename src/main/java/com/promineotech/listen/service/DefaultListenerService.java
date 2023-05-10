@@ -5,8 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.promineotech.listen.dao.ListenerDao;
-import com.promineotech.listen.entity.Favorites;
+//import com.promineotech.listen.entity.Favorites;
 import com.promineotech.listen.entity.Listener;
+import com.promineotech.listen.entity.Podcast;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -29,9 +30,9 @@ public class DefaultListenerService implements ListenerService {
   }
 
   @Override
-  public List<Favorites> fetchFavoritesByFavoritesId(int favoritesId) {
-    log.info("fetchFavoritesByFavoritesId method has been called with for favoritesId={}", favoritesId);
-    return listenerDao.fetchFavoritesByFavoritesId(favoritesId);
+  public List<Podcast> fetchFavoritesByFavoritesId(int favorites_id) {
+    log.info("fetchFavoritesByFavoritesId method has been called with for favorites_id={}", favorites_id);
+    return listenerDao.fetchFavoritesByFavoritesId(favorites_id);
   }
 
 }

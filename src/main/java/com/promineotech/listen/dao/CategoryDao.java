@@ -6,7 +6,7 @@ import com.promineotech.listen.entity.Category;
 
 public interface CategoryDao {
 
-  List<Category> fetchCategoriesByPodcastName(String podcastName);
+  List<Category> fetchCategoriesByPodcastName(String podcast_name);
 
   Optional<Category> addNewCategory(String category_name);
 

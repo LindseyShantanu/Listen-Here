@@ -52,7 +52,7 @@ public interface CategoryController {
       },
       parameters = {
           @Parameter(
-              name = "podcast name", 
+              name = "podcast_name", 
               allowEmptyValue = false, 
               required = true, 
               description = "The podcast name (i.e. 'Serial')")
@@ -63,7 +63,7 @@ public interface CategoryController {
   @ResponseStatus(code = HttpStatus.OK)
   List<Category> fetchCategoriesByPodcastName(
       @RequestParam(required = true) 
-        String podcastName);
+        String podcast_name);
 
 //POST creates a new podcast in database
 //newPodcast()  
@@ -145,12 +145,12 @@ public interface CategoryController {
                   name = "category_name",
                   allowEmptyValue = false,
                   required = true,
-                  description = "Name of category"),
+                  description = "Name of existing category"),
               @Parameter(
                   name = "new_category_name",
                   allowEmptyValue = false,
                   required = true,
-                  description = "Name of category")
+                  description = "Name of updated category")
           }
   )
 

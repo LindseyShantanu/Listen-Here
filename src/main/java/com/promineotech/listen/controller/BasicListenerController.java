@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import com.promineotech.listen.entity.Favorites;
+//import com.promineotech.listen.entity.Favorites;
 import com.promineotech.listen.entity.Listener;
+import com.promineotech.listen.entity.Podcast;
 import com.promineotech.listen.service.ListenerService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,9 +30,9 @@ public class BasicListenerController implements ListenerController {
   }
   
   @Override
-  public List<Favorites> fetchFavoritesByFavoritesId(int favoritesId) {
-    log.info("favoritesId={}", favoritesId);
-    return listenerService.fetchFavoritesByFavoritesId(favoritesId);
+  public List<Podcast> fetchFavoritesByFavoritesId(int favorites_id) {
+    log.info("favorites_id={}", favorites_id);
+    return listenerService.fetchFavoritesByFavoritesId(favorites_id);
   }
 
 

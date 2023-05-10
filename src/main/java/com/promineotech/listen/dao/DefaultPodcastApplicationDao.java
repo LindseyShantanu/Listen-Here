@@ -3,7 +3,7 @@ package com.promineotech.listen.dao;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+//import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-import com.promineotech.listen.entity.Category;
+//import com.promineotech.listen.entity.Category;
 import com.promineotech.listen.entity.Podcast;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,29 +28,17 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
   public List<Podcast> fetchPodcasts(String category) {
     log.debug("DAO: category={}", category);
 
-    /*
-     * private List<Category> fectchRecipeCategories(Connection conn, Integer recipeId) {
-        String sql = 
-                "SELECT c.* " 
-                + "FROM RECIPE_CATEGORY_TABLE" + " rc " 
-                + "JOIN CATEGORY_TABLE"
-                + " c USING (category_id) " 
-                + "WHERE recipe_id = ? " 
-                + "ORDER BY c.category_name";
-
-     */
     // @formatter: off
-    String sql = 
-        "SELECT * " 
-        + "FROM podcast " 
-        + "RIGHT JOIN category "
-        + "USING podcast_id = podcast_fk" 
-        + "ON category_fk = category_id"
+    String sql = ""
+        + "SELECT podcast.podcast_name, category.category_name "
+        + "FROM podcast "
+        + "INNER JOIN podcast_category ON podcast_category.podcast_fk = podcast.podcast_id "
+        + "INNER JOIN category ON category.category_id = podcast_category.category_fk "
         + "WHERE category_name = :category_name";
     // @formatter: on
 
     Map<String, Object> params = new HashMap<>();
-    params.put("category_name", category.toLowerCase());
+    params.put("category_name", category);
 
     return jdbcTemplate.query(sql, params, new RowMapper<>() {
       @Override
@@ -62,7 +50,7 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
             .podcast_name(rs.getString("podcast_name"))
             .podcast_author(rs.getString("podcast_author"))
             .listeners(rs.getInt("listeners"))
-            .date_created(rs.getDate("date_created"))
+            .date_created(rs.getString("date_created"))
             .build();
         // @formatter: on
       }
@@ -72,7 +60,7 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
   // POST/CREATE operation
   @Override
   public Optional<Podcast> newPodcast(String podcast_name, String podcast_author, BigDecimal rating,
-      int listeners, Date date_created) {
+      int listeners, String date_created) {
     log.debug("DAO: podcast_name={},  podcast_author={},rating={}, listeners={}, date_created={}",
         podcast_name, podcast_author, rating, listeners, date_created);
     
@@ -81,7 +69,7 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
         + "INSERT INTO podcast ("
         + "podcast_name, podcast_author, rating, listeners, date_created"
         + ") VALUES ("
-        + ":new_podcast_name, :new_podcast_author, :new_rating, :new_listeners, :new_date_created";
+        + ":podcast_name, :podcast_author, :rating, :listeners, :date_created)";
     // @formatter:on
 
     Map<String, Object> params = new HashMap<>();
@@ -106,26 +94,22 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
   // PUT/UPDATE operation
   @Override
   public Optional<Podcast> updatePodcast(String podcast_name, String podcast_author,
-      BigDecimal rating, int listeners, Date date_created, String new_podcast_name, 
-      String new_podcast_author, BigDecimal new_rating, int new_listeners, Date new_date_created) {
-    log.debug("DAO: podcast_name={}, podcast_author={}, rating={}, listeners={}, date_created={}, "
+      String new_podcast_name, String new_podcast_author, BigDecimal new_rating, 
+      int new_listeners, String new_date_created) {
+    log.debug("DAO: podcast_name={}, podcast_author={}, "
         + "new_podcast_name={}, new_podcast_author={}, new_rating={}, new_listeners={}, new_date_created={}",
-        podcast_name, podcast_author, rating, listeners, date_created,
+        podcast_name, podcast_author,
         new_podcast_name, new_podcast_author, new_rating, new_listeners, new_date_created);
 
     // @formatter:off
     String sql = ""
         + "UPDATE podcast "
-        + "SET new_podcast_name = :new_podcast_name, "
-        + "new_podcast_author = :new_podcast_author, "
-        + "new_rating = :new_rating, "
-        + "new_listeners = :new_listeners, "
-        + "new_date_created = :new_date_created, "
+        + "SET "
         + "podcast_name = :new_podcast_name, "
         + "podcast_author = :new_podcast_author, "
         + "rating = :new_rating, "
         + "listeners = :new_listeners, "
-        + "date_created = :new_date_created, "
+        + "date_created = :new_date_created "
         + "WHERE (podcast_name = :podcast_name AND "
         + "podcast_author = :podcast_author)";
     // @formatter:on
@@ -138,10 +122,7 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
     params.put("new_date_created", new_date_created);
     params.put("podcast_name", podcast_name);
     params.put("podcast_author", podcast_author);
-    params.put("rating", rating);
-    params.put("listeners", listeners);
-    params.put("date_created", date_created);
-
+   
     jdbcTemplate.update(sql, params);
     return Optional.ofNullable(Podcast.builder()
         // @formatter:off

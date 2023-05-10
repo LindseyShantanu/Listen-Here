@@ -1,7 +1,7 @@
 package com.promineotech.listen.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
+//import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ public class Podcast {
   private String podcast_author;
   private BigDecimal rating;
   private int listeners;
-  private Date date_created;
+  private String date_created;
 
   @JsonIgnore
   public int getpodcast_id() {

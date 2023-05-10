@@ -16,9 +16,9 @@ public class BasicCategoryController implements CategoryController {
   private CategoryService categoryService;
   
   @Override
-  public List<Category> fetchCategoriesByPodcastName(String podcastName) {
-    log.info("podcastName ={}", podcastName);
-    return categoryService.fetchCategoriesByPodcastName(podcastName);
+  public List<Category> fetchCategoriesByPodcastName(String podcast_name) {
+    log.info("podcastName ={}", podcast_name);
+    return categoryService.fetchCategoriesByPodcastName(podcast_name);
   }
 
   @Override

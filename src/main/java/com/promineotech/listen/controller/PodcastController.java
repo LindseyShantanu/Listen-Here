@@ -1,7 +1,7 @@
 package com.promineotech.listen.controller;
 
 import java.math.BigDecimal;
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.promineotech.listen.entity.Category;
+//import com.promineotech.listen.entity.Category;
 import com.promineotech.listen.entity.Podcast;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -140,7 +140,7 @@ public interface PodcastController {
       @RequestParam(required = true)
       int listeners,
       @RequestParam(required = false)
-      Date date_created);
+      String date_created);
   // @formatter:on
   
 //PUT updates a podcast's information
@@ -185,21 +185,6 @@ public interface PodcastController {
                   required = true,
                   description = "Author/Speaker of podcast"),
               @Parameter(
-                  name = "rating",
-                  allowEmptyValue = false,
-                  required = true,
-                  description = "Rating on scale of 0.0 to 5.0"),
-              @Parameter(
-                  name = "listeners",
-                  allowEmptyValue = false,
-                  required = true,
-                  description = "Number of listeners in this app"),
-              @Parameter(
-                  name = "date_created",
-                  allowEmptyValue = false,
-                  required = true,
-                  description = "Date when the podcast first started"),
-              @Parameter(
                   name = "new_podcast_name",
                   allowEmptyValue = false,
                   required = true,
@@ -235,12 +220,6 @@ public interface PodcastController {
       @RequestParam(required = true)
       String podcast_author,
       @RequestParam(required = true)
-      BigDecimal rating,
-      @RequestParam(required = true)
-      int listeners,
-      @RequestParam(required = true)
-      Date date_created,
-      @RequestParam(required = true)
       String new_podcast_name,
       @RequestParam(required = true)
       String new_podcast_author,
@@ -249,7 +228,7 @@ public interface PodcastController {
       @RequestParam(required = true)
       int new_listeners,
       @RequestParam(required = true)
-      Date new_date_created);
+      String new_date_created);
   // @formatter:on
   
 //DELETE-deletes a cast member from the database
