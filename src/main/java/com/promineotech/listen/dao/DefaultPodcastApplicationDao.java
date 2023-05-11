@@ -29,11 +29,10 @@ public class DefaultPodcastApplicationDao implements PodcastApplicationDao {
     log.debug("DAO: category={}", category);
 
     // @formatter: off
-    String sql = ""
-        + "SELECT podcast.podcast_name, category.category_name "
+    String sql = "SELECT podcast.*, category.* "
         + "FROM podcast "
-        + "INNER JOIN podcast_category ON podcast_category.podcast_fk = podcast.podcast_id "
-        + "INNER JOIN category ON category.category_id = podcast_category.category_fk "
+        + "INNER JOIN podcast_category ON podcast_category.podcast_id = podcast.podcast_id "
+        + "INNER JOIN category ON category.category_id = podcast_category.category_id "
         + "WHERE category_name = :category_name";
     // @formatter: on
 

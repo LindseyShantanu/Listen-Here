@@ -22,11 +22,11 @@ INSERT INTO listener(listener_name, favorite_id, about) VALUES ("Khalil", 3, "Ne
 INSERT INTO listener(listener_name, favorite_id, about) VALUES ("Tahmid", 4, "Love a good true crime!");
 INSERT INTO listener(listener_name, favorite_id, about) VALUES ("Kyren", 5, "AKA Buzzlightyear");
 
-INSERT into podcast_category(podcast_fk, category_fk) values (1, 1);
-INSERT into podcast_category(podcast_fk, category_fk) values (1, 4);
-INSERT into podcast_category(podcast_fk, category_fk) values (2, 2);
-INSERT into podcast_category(podcast_fk, category_fk) values (2, 2);
-INSERT into podcast_category(podcast_fk, category_fk) values (3, 2);
-INSERT into podcast_category(podcast_fk, category_fk) values (4, 3);
-INSERT into podcast_category(podcast_fk, category_fk) values (4, 5);
-INSERT into podcast_category(podcast_fk, category_fk) values (5, 3);
+INSERT into podcast_category(podcast_id, category_id) values (1, 1);
+INSERT into podcast_category(podcast_id, category_id) values (1, 4);
+INSERT into podcast_category(podcast_id, category_id) values (2, 2);
+INSERT into podcast_category(podcast_id, category_id) values (2, 2);
+INSERT into podcast_category(podcast_id, category_id) values (3, 2);
+INSERT into podcast_category(podcast_id, category_id) values (4, 3);
+INSERT into podcast_category(podcast_id, category_id) values (4, 5);
+INSERT into podcast_category(podcast_id, category_id) values (5, 3);

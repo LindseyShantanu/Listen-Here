@@ -25,13 +25,11 @@ public class DefaultCategoryDao implements CategoryDao {
     log.debug("DAO: podcast_name ={}", podcast_name);
     
  // @formatter:off
-    String sql = ""
-        + "SELECT podcast.podcast_name, category.category_name "
+    String sql = "SELECT podcast.*, category.* "
         + "FROM podcast "
-        + "INNER JOIN podcast_category ON podcast_category.podcast_fk = podcast.podcast_id "
-        + "INNER JOIN category ON category.category_id = podcast_category.category_fk "
-        + "WHERE podcast.podcast_name = :podcast_name";
-    
+        + "INNER JOIN podcast_category ON podcast_category.podcast_id = podcast.podcast_id "
+        + "INNER JOIN category ON category.category_id = podcast_category.category_id "
+        + "WHERE podcast_name = :podcast_name";
     // @formatter:on
     
     Map<String, Object> params = new HashMap<>();
